@@ -10,8 +10,9 @@
 <% end %>
 
 
-<h1>Books</h1>
+<h1>Book detail</h1>
   <p><%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg" %></p>
+  <div><%= @book.user.name %></div>
   <div>title:<%= @book.title %></div>
   <div>body:<%= @book.body %></div>
   <% if @book.user_id == current_user.id %>

@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <div class = "notice" >
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <h1>User info</h1>
 <p><%= attachment_image_tag user, :profile_image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg" %></p>
 <p>name <%= user.name %></p>
