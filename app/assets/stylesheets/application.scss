@@ -17,10 +17,34 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
  .notice{
    color: green;
  }
 
-.btn-block{
+.btn-secondary{
+ color: #fff;
+ background-color: #6c757d;
+}
+
+main{
+ padding: 10px;
+}
+
+.row{
+ margin-bottom: 10px;
+}
+
+.user-edit-button{
  width: 100%;
+}
+
+.error-message{
+ color: red;
 }

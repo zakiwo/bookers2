@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if current_user.id != user.id
       flash[:notice] = "権限がありません"
-      redirect_to users_path
+      redirect_to user_path(current_user)
     end
   end
 
@@ -16,8 +16,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @books = @user.books.all
+    @book_user = User.find(params[:id])
+    @books = @book_user.books.all
     @new_book = Book.new
   end
 
