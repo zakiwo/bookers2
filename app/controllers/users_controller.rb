@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+  before_action :ensure_current_user, {only: [:edit, :update]}
+
+  def ensure_current_user
+    user = User.find(params[:id])
+    if current_user.id != user.id
+      flash[:notice] = "権限がありません"
+      redirect_to users_path
+    end
+  end
+
   def index
     @user = User.find(current_user.id)
     @users = User.all
