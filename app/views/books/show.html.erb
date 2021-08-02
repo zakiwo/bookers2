@@ -1,4 +1,6 @@
-<%= render 'layouts/error_messages',model: @comment %>
+<div class="comment-error">
+  <%= render 'layouts/error_messages', model: @comment %>
+</div>
 
 <div class="container">
   <div class="row">
@@ -29,7 +31,8 @@
         <div class="comment" >
           <%= render 'book_comments/comments', book: @book %>
         </div>
-
-        <%= render 'book_comments/new_comment', book: @book, comment: @comment %>
+        <div class="new-comment">
+          <%= render 'book_comments/new_comment', book: @book, comment: @comment %>
+        </div>
   </div>
 </div>
