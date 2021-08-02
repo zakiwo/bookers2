@@ -1,3 +1,4 @@
 $('.comment').html("<%= escape_javascript(render partial:'book_comments/comments',locals:{book: @book}) %>");
 $('textarea').val("");
 $('.comment-error').html("<%= escape_javascript(render 'layouts/error_messages', model: @comment ) %>")
+$('.comments-count').html("コメント数：<%= @book.book_comments.count %>")
