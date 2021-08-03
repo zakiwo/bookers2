@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
-    <%= render 'users/list', user:@book_user,new_book:@new_book %>
-    <div class="book-table">
+    <div class="col-md-3">
+      <%= render 'users/list', user:@book_user,new_book:@new_book %>
+    </div>
+    <div class="col-md-9 book-table">
       <%= render 'books/books', books:@books %>
     </div>
   </div>

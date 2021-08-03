@@ -1,4 +1,3 @@
-<div class="col-md-12 offset-md-1">
   <div>
     <%= link_to "新しい順", sort_by_updated_at_path, remote: true %> | <%= link_to "評価の高い順", sort_by_evaluation_path, remote: true%>
   </div>
@@ -9,6 +8,7 @@
         <th></th>
         <th>Title</th>
         <th>Opinion</th>
+        <th>Category</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -18,16 +18,21 @@
           <td><%= link_to attachment_image_tag(book.user, :profile_image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg"),user_path(book.user) %></td>
           <td><%= link_to book.title, book_path(book) %></td>
           <td><%= book.body %></td>
+          <% if book.category %>
+            <td><%= link_to book.category, search_category_path(category: book.category),remote: true %></td>
+          <% else %>
+            <td>カテゴリー登録なし</td>
+          <% end %>
+
           <td class="favorite-btn-<%= book.id %>">
             <%= render 'books/favorites', book: book %>
           </td>
-          <td class="book_evaluation" data-score="<%= book.evaluation %>"></td>
           <td>コメント数：<%= book.book_comments.count %></td>
+          <td class="book_evaluation" data-score="<%= book.evaluation %>"></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-</div>
 
 <script>
   $('.book_evaluation').raty({

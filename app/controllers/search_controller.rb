@@ -27,4 +27,10 @@ class SearchController < ApplicationController
     end
   end
 
+  def search_category
+    @category = params[:category]
+    @books = Book.where(["category like?", "%#{@category}%"])
+
+  end
+
 end

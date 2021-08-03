@@ -52,6 +52,12 @@
               </li>
               <% end %>
             </ul>
+            <div class="category-search">
+              <%= form_with url: search_category_path, method: :get, remote: true do |f|  %>
+                <%= f.text_field :category, value: @category %>
+                <%= f.submit "search" %>
+              <% end %>
+            </div>
           </div>
         </div>
       </nav>

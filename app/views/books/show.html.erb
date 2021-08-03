@@ -2,11 +2,13 @@
   <%= render 'layouts/error_messages', model: @comment %>
 </div>
 
-<div class="container">
+<div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'users/list',user:@user,new_book:@new_book %>
+    <div class="col-md-3">
+      <%= render 'users/list',user:@user,new_book:@new_book %>
+    </div>
 
-    <div class="col-md-9">
+    <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
         <table class="table">
           <tbody>
@@ -15,15 +17,16 @@
               <td><%= link_to @book.user.name, user_path(@book.user) %></td>
               <td><%= link_to @book.title, book_path(@book) %></td>
               <td><%= @book.body %></td>
+              <td><%= @book.category %></td>
               <td class="favorite-btn-<%= @book.id %>">
                 <%= render 'books/favorites', book: @book %>
               </td>
-               <td class="book_evaluation" data-score="<%= @book.evaluation %>"></td>
               <% if @book.user_id == current_user.id %>
                 <td><%= link_to "Edit", edit_book_path(@book),class:"btn btn-sm btn-success" %></td>
                 <td><%= link_to "Destroy", book_path(@book),class:"btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当に消してもいいの？" %></td>
               <% end %>
               <td class="comments-count">コメント数：<%= @book.book_comments.count %></td>
+              <td class="book_evaluation" data-score="<%= @book.evaluation %>"></td>
             </tr>
           </tbody>
         </table>
@@ -40,6 +43,7 @@
 
 <script>
   $('.book_evaluation').raty({
+    size: 20,
     readOnly: true,
     srore: function(){
       return $(this).attr('data-score');
