@@ -13,6 +13,9 @@
           <label for="book_opinion">Opinion</label>
           <%= f.text_area :body,class:"form-control book_body" %>
         </div>
+        <div class="form-group book_evaluation" data-score="<%= @book.evaluation %>">
+          <label for="book_evaluation">Evaluation</label>
+        </div>
         <div class="form-group">
           <%= f.submit 'Update Book',class:"btn btn-success" %>
         </div>
@@ -23,3 +26,13 @@
     </div>
   </div>
 </div>
+
+<script>
+    $('.book_evaluation').raty({
+    readOnly: true,
+    srore: function(){
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+    });
+  </script>
