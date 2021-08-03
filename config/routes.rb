@@ -12,4 +12,6 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
   get 'search' => 'search#search', as: 'search'
+  get 'sort_by_evaluation' => 'sortings#sort_by_evaluation', as: 'sort_by_evaluation'
+  get 'sort_by_updated_at' => 'sortings#sort_by_updated_at', as: 'sort_by_updated_at'
 end

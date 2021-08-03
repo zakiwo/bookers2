@@ -3,7 +3,8 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <%= render 'users/list',user:@user,new_book:@new_book %>
-
-    <%= render 'books/books',books:@books %>
+    <div class="book-table">
+      <%= render 'books/books',books:@books %>
+    </div>
   </div>
 </div>
