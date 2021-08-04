@@ -9,10 +9,16 @@ class BooksController < ApplicationController
     end
   end
 
+  # 過去一週間のいいねを取得
+  def a_week_favorite(favorite)
+    range = Time.current.ago(7.days)..Time.current
+    return favorite.where(created_at: range)
+  end
+
   def index
     @user = User.find(current_user.id)
     @new_book = Book.new
-    @books = Book.all
+    @books = Book.all.sort_by{|book| a_week_favorite(book.favorites).count}.reverse
   end
 
   def create
