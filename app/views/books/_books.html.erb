@@ -27,8 +27,11 @@
           <td class="favorite-btn-<%= book.id %>">
             <%= render 'books/favorites', book: book %>
           </td>
-          <td>コメント数：<%= book.book_comments.count %></td>
-          <td class="book_evaluation" data-score="<%= book.evaluation %>"></td>
+          <td style="width: 40%">
+            コメント数：<%= book.book_comments.count %></br>
+            閲覧数：<%= book.impressions_count %>
+          </td>
+          <td class="book_evaluation" data-score="<%= book.evaluation %>" style="width: 50%"></td>
         </tr>
       <% end %>
     </tbody>

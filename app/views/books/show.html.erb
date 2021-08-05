@@ -8,13 +8,15 @@
       <%= render 'users/list',user:@user,new_book:@new_book %>
     </div>
 
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-9">
       <h2>Book detail</h2>
         <table class="table">
           <tbody>
             <tr>
-              <td><%= link_to attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg"), user_path(@book.user) %></td>
-              <td><%= link_to @book.user.name, user_path(@book.user) %></td>
+              <td>
+                <%= link_to attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg"), user_path(@book.user) %>
+                <%= link_to @book.user.name, user_path(@book.user) %>
+                </td>
               <td><%= link_to @book.title, book_path(@book) %></td>
               <td><%= @book.body %></td>
               <td><%= @book.category %></td>
@@ -25,8 +27,11 @@
                 <td><%= link_to "Edit", edit_book_path(@book),class:"btn btn-sm btn-success" %></td>
                 <td><%= link_to "Destroy", book_path(@book),class:"btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当に消してもいいの？" %></td>
               <% end %>
-              <td class="comments-count">コメント数：<%= @book.book_comments.count %></td>
-              <td class="book_evaluation" data-score="<%= @book.evaluation %>"></td>
+              <td class="comments-count" style="width: 40%">
+                コメント数：<%= @book.book_comments.count %></br>
+                閲覧数：<%= @book.impressions_count %>
+              </td>
+              <td class="book_evaluation" data-score="<%= @book.evaluation %>" style="width: 50%"></td>
             </tr>
           </tbody>
         </table>
