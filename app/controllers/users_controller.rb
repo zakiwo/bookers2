@@ -19,6 +19,26 @@ class UsersController < ApplicationController
     @book_user = User.find(params[:id])
     @books = @book_user.books.all
     @new_book = Book.new
+    #自分のエントリー
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    #相手のエントリー
+    @userEntry = Entry.where(user_id: @book_user.id)
+    if @book_user.id == current_user.id
+    else
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      if @isRoom
+      else
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def edit

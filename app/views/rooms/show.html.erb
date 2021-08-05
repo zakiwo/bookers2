@@ -1,0 +1,28 @@
+<div class="error-messages">
+  <%= render 'layouts/error_messages', model:@room %>
+</div>
+
+<% @entries.each do |e| %>
+  <% if e.user != current_user  %>
+    <h2><%= e.user.name %>さんとのチャット</h2>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <h3 class="mt-5">新規投稿</h3>
+      <%= form_with model:@message,remote:true do |f| %>
+        <%= f.text_field :content, class:"form-control message-content" %>
+        <%= f.hidden_field :room_id, value:@room.id %>
+        <%= f.submit '投稿',class:"btn btn-success mt-1"  %>
+      <% end %>
+    </div>
+
+    <div class="col-md-10">
+      <div class="messages">
+        <%= render 'rooms/room', model: @messages %>
+      </div>
+    </div>
+  </div>
+</div>

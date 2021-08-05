@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get 'search_category' => 'search#search_category', as: 'search_category'
   get 'sort_by_evaluation' => 'sortings#sort_by_evaluation', as: 'sort_by_evaluation'
   get 'sort_by_updated_at' => 'sortings#sort_by_updated_at', as: 'sort_by_updated_at'
+  resources :messages, only:[:create]
+  resources :rooms, only:[:create, :show, :index]
 end
