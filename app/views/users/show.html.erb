@@ -5,6 +5,41 @@
     </div>
     <div class="col-md-9 book-table">
       <%= render 'books/books', books:@books %>
+      <div class="number-of-posts">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>今日の投稿数</th>
+              <th>前日の投稿数</th>
+              <th>前日比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @today_posts %></td>
+              <td><%= @yesterday_posts %></td>
+              <td><%= @day_comparison %>%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>今週の投稿数</th>
+              <th>前週の投稿数</th>
+              <th>前週比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @this_week_posts %></td>
+              <td><%= @last_week_posts %></td>
+              <td><%= @week_comparison %>%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

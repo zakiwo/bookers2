@@ -17,6 +17,20 @@ class UsersController < ApplicationController
 
   def show
     @book_user = User.find(params[:id])
+    @today_posts = @book_user.post_counts(Time.current.beginning_of_day..Time.current)
+    @yesterday_posts = @book_user.post_counts(Time.current.ago(1.days).all_day)
+    @this_week_posts = @book_user.post_counts(Time.current.ago(6.days).beginning_of_day..Time.current)
+    @last_week_posts = @book_user.post_counts(Time.current.ago(2.weeks).beginning_of_day..Time.current.ago(1.weeks).end_of_day)
+    if @yesterday_posts != 0
+      @day_comparison = (@today_posts.to_f / @yesterday_posts.to_f * 100)
+    else
+      @day_comparison = 0
+    end
+    if @last_week_posts != 0
+      @week_comparison = (@this_week_posts.to_f / @last_week_posts.to_f * 100)
+    else
+      @week_comparison = 0
+    end
     @books = @book_user.books.all
     @new_book = Book.new
     #自分のエントリー
@@ -60,5 +74,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-  
+
 end

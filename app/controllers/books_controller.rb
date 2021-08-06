@@ -11,7 +11,7 @@ class BooksController < ApplicationController
 
   # 過去一週間のいいねを取得
   def a_week_favorite(favorite)
-    range = Time.current.ago(7.days)..Time.current
+    range = Time.current.ago(6.days)..Time.current
     return favorite.where(created_at: range)
   end
 
