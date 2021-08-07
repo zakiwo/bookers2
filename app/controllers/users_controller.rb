@@ -17,10 +17,10 @@ class UsersController < ApplicationController
 
   def show
     @book_user = User.find(params[:id])
-    @today_posts = @book_user.post_counts(Time.current.beginning_of_day..Time.current)
-    @yesterday_posts = @book_user.post_counts(Time.current.ago(1.days).all_day)
-    @this_week_posts = @book_user.post_counts(Time.current.ago(6.days).beginning_of_day..Time.current)
-    @last_week_posts = @book_user.post_counts(Time.current.ago(2.weeks).beginning_of_day..Time.current.ago(1.weeks).end_of_day)
+    @today_posts = @book_user.books.today.count
+    @yesterday_posts = @book_user.books.yesterday.count
+    @this_week_posts = @book_user.books.this_week.count
+    @last_week_posts = @book_user.books.last_week.count
     if @yesterday_posts != 0
       @day_comparison = (@today_posts.to_f / @yesterday_posts.to_f * 100)
     else
@@ -31,8 +31,16 @@ class UsersController < ApplicationController
     else
       @week_comparison = 0
     end
+
+    @six_days_ago_posts = @book_user.books.six_days_ago.count
+    @five_days_ago_posts = @book_user.books.five_days_ago.count
+    @four_days_ago_posts = @book_user.books.four_days_ago.count
+    @three_days_ago_posts = @book_user.books.three_days_ago.count
+    @two_days_ago_posts = @book_user.books.two_days_ago.count
+
     @books = @book_user.books.all
     @new_book = Book.new
+
     #自分のエントリー
     @currentUserEntry = Entry.where(user_id: current_user.id)
     #相手のエントリー

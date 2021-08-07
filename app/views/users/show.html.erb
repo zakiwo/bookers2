@@ -6,6 +6,7 @@
     <div class="col-md-9 book-table">
       <%= render 'books/books', books:@books %>
       <div class="number-of-posts">
+        <h2>投稿数の前日比・前週比</h2>
         <table class="table">
           <thead>
             <tr>
@@ -40,6 +41,66 @@
           </tbody>
         </table>
       </div>
+
+      <div>
+        <h2>7日分の投稿数</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>6日前</th>
+              <th>5日前</th>
+              <th>4日前</th>
+              <th>3日前</th>
+              <th>2日前</th>
+              <th>1日前</th>
+              <th>今日</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @six_days_ago_posts %></td>
+              <td><%= @five_days_ago_posts %></td>
+              <td><%= @four_days_ago_posts %></td>
+              <td><%= @three_days_ago_posts %></td>
+              <td><%= @two_days_ago_posts %></td>
+              <td><%= @yesterday_posts %></td>
+              <td><%= @today_posts %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <canvas id="myChart"></canvas>
+        <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ["6日前", "5日前", "4日前", "3日前", "2日前", "1日前", "今日"],
+            datasets: [{
+              label: '投稿数',
+              backgroundColor: "rgba(0,0,150,0.3",
+              borderColor: "rgba(0,0,150,1)",
+              data: [<%= @six_days_ago_posts %>, <%= @five_days_ago_posts %>, <%= @four_days_ago_posts %>, <%= @three_days_ago_posts %>, <%= @two_days_ago_posts %>, <%= @yesterday_posts %>, <%= @today_posts %>]
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: '7日間の投稿数の比較'
+            },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  suggestedMax: 10,
+                  sugggestedMin: 0,
+                  stepSize: 1,
+                }
+              }]
+            }
+          }
+        });
+        </script>
     </div>
   </div>
 </div>

@@ -30,9 +30,4 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  #該当のユーザーがrangeの期間に投稿した数をカウント
-  def post_counts(range)
-    books.where(created_at: range).count
-  end
-
 end
