@@ -4,6 +4,7 @@
       <%= render 'users/list', user:@book_user,new_book:@new_book, room:@room, roomId:@roomId %>
     </div>
     <div class="col-md-9 book-table">
+      <%= link_to "グループを作成する", new_group_path %> | <%= link_to "グループ一覧", groups_path %>
       <%= render 'books/books', books:@books %>
       <div class="number-of-posts">
         <h2>投稿数の前日比・前週比</h2>

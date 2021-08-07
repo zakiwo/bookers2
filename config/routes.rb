@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get 'sort_by_updated_at' => 'sortings#sort_by_updated_at', as: 'sort_by_updated_at'
   resources :messages, only:[:create]
   resources :rooms, only:[:create, :show, :index]
+  resources :groups
 end
