@@ -63,6 +63,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def search
+    @book_user = User.find(params[:id])
+    @search_day = params[:search_day].to_datetime
+    @search_day_counts = @book_user.books.search_day(@search_day).count
+  end
+
   def edit
     @user = User.find(params[:id])
   end

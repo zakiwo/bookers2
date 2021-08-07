@@ -16,4 +16,6 @@ class Book < ApplicationRecord
 
   scope :this_week, -> {where(created_at: Time.current.ago(6.days).beginning_of_day..Time.current)}
   scope :last_week, -> {where(created_at: Time.current.ago(2.weeks).beginning_of_day..Time.current.ago(1.weeks).end_of_day)}
+
+  scope :search_day, -> (search_day){where(created_at: search_day.all_day)}
 end
