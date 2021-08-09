@@ -6,14 +6,38 @@
     <div class="col-md-9">
       <h2>Group Detail</h2>
       <table class="table">
-        <tr>
-          <td></td>
-          <td><%= @group.name %></td>
-          <td><%= @group.introduction %></td>
-          <% if @group.owner_id == current_user.id %>
-            <td><%= link_to "Edit", edit_group_path(@group) %></td>
-          <% end %>
-        </tr>
+        <thead>
+          <tr>
+            <td></td>
+            <td>グループ名</td>
+            <td>紹介文</td>
+            <td>メンバー</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= attachment_image_tag @group, :image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg" %></td>
+            <td><%= @group.name %></td>
+            <td><%= @group.introduction %></td>
+            <td>
+              <% @group.group_users.each do |group_user| %>
+                <p><%= group_user.user.name %></p>
+              <% end %>
+            </td>
+            <td>
+              <% if @group.owner_id == current_user.id %>
+                <%= link_to "Edit", edit_group_path(@group),class:"btn btn-sm btn-success" %>
+                <%= link_to "Notice an Event", new_group_send_mail_path(@group), class:"btn btn-sm btn-primary" %>
+              <% else %>
+                <% unless @group.group_users.exists?(user_id: current_user.id) %>
+                  <%= link_to "Join this group", group_group_users_path(@group), method: :post, class:"btn btn-sm btn-success" %>
+                <% else %>
+                  <%= link_to "Leave this group", group_group_users_path(@group), method: :delete, class:"btn btn-sm btn-danger" %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

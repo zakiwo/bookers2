@@ -20,9 +20,17 @@
               <td><%= attachment_image_tag group, :image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg" %></td>
               <td><%= link_to group.name, group_path(group) %></td>
               <td><%= group.introduction %></td>
+              <td>
               <% if group.owner_id == current_user.id %>
-                <td><%= link_to "Edit", edit_group_path(group) %></td>
+                <%= link_to "Edit", edit_group_path(group), class:"btn btn-sm btn-success"%>
+              <% else %>
+                <% if group.group_users.exists?(user_id: current_user.id) %>
+                  参加中
+                <% else %>
+                  未参加
+                <% end %>
               <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
