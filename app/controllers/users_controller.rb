@@ -63,6 +63,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def sort
+    user = User.find(params[:id])
+    @books = user.books.all.order(params[:sort])
+  end
+
   def search
     @book_user = User.find(params[:id])
     @search_day = params[:search_day].to_datetime

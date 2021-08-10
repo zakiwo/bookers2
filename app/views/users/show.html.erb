@@ -3,9 +3,16 @@
     <div class="col-md-3">
       <%= render 'users/list', user:@book_user,new_book:@new_book, room:@room, roomId:@roomId %>
     </div>
-    <div class="col-md-9 book-table">
+    <div class="col-md-9">
+      <div>
       <%= link_to "グループを作成する", new_group_path %> | <%= link_to "グループ一覧", groups_path %>
-      <%= render 'books/books', books:@books %>
+      </div>
+      <div>
+        <%= link_to "新しい順", users_sort_path(@book_user, sort: 'created_at DESC'), remote: true %> | <%= link_to "評価の高い順", users_sort_path(@book_user, sort: 'evaluation DESC'), remote: true %>
+      </div>
+      <div class="book-table">
+        <%= render 'books/books', books:@books %>
+      </div>
       <div class="number-of-posts">
         <h2>投稿数の前日比・前週比</h2>
         <table class="table">
@@ -20,7 +27,7 @@
             <tr>
               <td><%= @today_posts %></td>
               <td><%= @yesterday_posts %></td>
-              <td><%= @day_comparison %>%</td>
+              <td><%= @day_comparison.round %>%</td>
             </tr>
           </tbody>
         </table>
@@ -37,7 +44,7 @@
             <tr>
               <td><%= @this_week_posts %></td>
               <td><%= @last_week_posts %></td>
-              <td><%= @week_comparison %>%</td>
+              <td><%= @week_comparison.round %>%</td>
             </tr>
           </tbody>
         </table>

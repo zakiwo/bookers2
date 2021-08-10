@@ -37,8 +37,20 @@ class GroupsController < ApplicationController
     end
   end
 
+  def new_mail
+    @group = Group.find(params[:group_id])
+  end
+
+  def send_mail
+    @group = Group.find(params[:group_id])
+    @group_users = @group.users
+    @title = params[:title]
+    @body = params[:body]
+    SendMailer.with(group_users: @group_users, title: @title, body: @body).send_email.deliver_now
+  end
+
   def destroy
-    
+
   end
 
   private

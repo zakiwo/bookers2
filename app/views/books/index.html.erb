@@ -5,8 +5,13 @@
     <div class="col-md-3">
       <%= render 'users/list',user:@user,new_book:@new_book %>
     </div>
-    <div class="col-md-9 book-table">
-      <%= render 'books/books',books:@books %>
+    <div class="col-md-9">
+      <div>
+        <%= link_to "新しい順", books_sort_path(sort:'created_at DESC'), remote: true %> | <%= link_to "評価の高い順", books_sort_path(sort:'evaluation DESC'), remote: true %>
+      </div>
+      <div class="book-table">
+        <%= render 'books/books',books:@books %>
+      </div>
     </div>
   </div>
 </div>

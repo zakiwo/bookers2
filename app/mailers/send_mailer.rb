@@ -2,12 +2,9 @@ class SendMailer < ApplicationMailer
   default from: 'notifications@example.com'
 
   def send_email
-    @user_email = params[:user_email]
+    group_users = params[:group_users]
     @title = params[:title]
     @body = params[:body]
-    @owner_email = params[:owner_email]
-    mail(from: @owner_email,
-         to: @user_email,
-         subject: @title)
+    mail(bcc: group_users.pluck(:email), subject: @title)
   end
 end

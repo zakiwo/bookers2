@@ -42,6 +42,10 @@ class BooksController < ApplicationController
     @comment = BookComment.new
     @book = Book.find(params[:id])
   end
+  
+  def sort
+    @books = Book.all.order(params[:sort])
+  end
 
   def edit
     @book = Book.find(params[:id])
